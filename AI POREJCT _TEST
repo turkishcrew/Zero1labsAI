@@ -1,0 +1,28 @@
+# test_encryption_module.py
+
+import unittest
+from encryption_module import encrypt_data, decrypt_data
+
+class TestEncryptionModule(unittest.TestCase):
+
+    def test_encrypt_decrypt(self):
+        """
+        Şifreleme ve deşifreleme fonksiyonlarının doğru çalıştığını test eder.
+        """
+        original_data = "Zero1 Labs AI Test"
+        encrypted_data = encrypt_data(original_data)
+        decrypted_data = decrypt_data(encrypted_data)
+
+        self.assertNotEqual(original_data, encrypted_data)  # Şifreleme sonucunun farklı olması gerekiyor
+        self.assertEqual(original_data, decrypted_data)    # Deşifreleme sonucu aynı olmalı
+
+    def test_decrypt_invalid_data(self):
+        """
+        Geçersiz bir şifrelenmiş veriyle deşifreleme yapılmaya çalışıldığında hata fırlatıldığını test eder.
+        """
+        invalid_data = "InvalidEncryptedData"
+        with self.assertRaises(Exception):
+            decrypt_data(invalid_data)
+
+if __name__ == "__main__":
+    unittest.main()
